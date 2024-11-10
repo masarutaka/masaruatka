@@ -1,61 +1,35 @@
 ```mermaid
 classDiagram
-    class Scraper {
-          data_samples
-          max_page
-          url
-          times
-          start
-          finish
-          scrape
-          print_progress
-          calculate_remaining_time()
-          sound()
+    class Scrape {
+        - String url
+        - Int max_page
+        + load_page(url: String)
+        + scrape()
+        + measure_time()
     }
 
-    class PageLoader {
-          load_page(url)
+    class DataSample {
+        + get_data()
     }
 
-    class PropertyProcessor {
-          process_property_data(soup)
-          extract_building_info()
-          extract_room_info()
+    class DataHome {
+        + String category
+        + String name
+        + String address
+        + String near_station
+        + Int age_and_floors
     }
 
-    class requests {
-          get(url)
+    class DataRoom {
+        + Int floor 
+        + Int price_and_price_administration
+        + Int price_deposit_and_gratuity
+        + String madori_and_menseki
+        + String url
     }
 
-    class retry {
-          retry(tries, delay, backoff)
-    }
-
-    class BeautifulSoup {
-          find_all()
-          find()
-    }
-
-    class urllib_parse {
-          urljoin()
-    }
-
-    class time {
-          time()
-          sleep()
-    }
-
-    class numpy {
-          mean()
-    }
-
-    Scraper --> PageLoader 
-    Scraper --> PropertyProcessor 
-    PageLoader --> requests 
-    PageLoader --> retry 
-    PropertyProcessor --> BeautifulSoup 
-    PropertyProcessor --> urllib_parse 
-    Scraper --> time 
-    Scraper --> numpy 
-
+    Scrape --> DataSample : 
+    DataSample <|-- DataHome : 
+    DataSample <|-- DataRoom : 
 ```
+
