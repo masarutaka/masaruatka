@@ -135,15 +135,22 @@ class ResultSaver:
         df.to_csv(self.filename, index=False)
         print(f"データを {self.filename} に保存しました！")
 
-if __name__ == "__main__":
-    base_url = 'https://suumo.jp/jj/chintai/ichiran/FR301FC001/?page={}'
-    loader = PageLoader(base_url)
-    parser = Parser()
-    # Assuming you intend to save the data to a file named 'results.csv'. Adjust as needed.
-    saver = ResultSaver('results.csv')  
-    scraper = Scraper(loader, parser, saver, max_page=200)
+class Main:
+    def __init__(self, base_url='https://suumo.jp/jj/chintai/ichiran/FR301FC001/?page={}', max_page=200, output_file='results.csv'):
+        self.base_url = base_url
+        self.max_page = max_page
+        self.output_file = output_file
+        
+        self.loader = PageLoader(self.base_url)
+        self.parser = Parser()
+        self.saver = ResultSaver(self.output_file)
+        self.scraper = Scraper(self.loader, self.parser, self.saver, max_page=self.max_page)
+    
+    def run(self):
+        self.scraper.run()
+        print("スクレイピング完了！")
 
-    # You likely meant to call the 'run' method to start the scraping process.
-    scraper.run()  
-    print("スクレイピング完了！")
+if __name__ == "__main__":
+    suumo_scraper = SuumoScraper()
+    suumo_scraper.run()
 
