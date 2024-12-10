@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from building import Building
+from model.Building import Building
 
 @dataclass
 class Room:

@@ -1,7 +1,7 @@
 from Scraper import Scraper
 from PageLoader import PageLoader
 from Parser import Parser
-from result_saver import ResultSaver
+from Result_saver import ResultSaver
 
 class Main:
     def __init__(self, base_url='https://suumo.jp/jj/chintai/ichiran/FR301FC001/?page={}', max_page=200, output_file='results.csv'):
